@@ -1,11 +1,9 @@
-import sys, pygame
-import random
-import math
+import sys, pygame, random, math
 
 pygame.init()
 
 #size of screen
-SIZE = width, height = 400,400
+SIZE = WIDTH, HEIGHT = 400,400
 #radius of circle
 RADIUS = 200
 #colors
@@ -30,6 +28,8 @@ total = 0
 circle = 0
 
 
+
+
 while 1:
     #close when x is clicked
     for event in pygame.event.get():
@@ -42,7 +42,7 @@ while 1:
     caption = pygame.display.set_caption(CAPTION_TEXT)
 
     #draw background circle
-    backgroundCircle = pygame.draw.circle(screen, GREY, [width/2, height/2], RADIUS)
+    backgroundCircle = pygame.draw.circle(screen, GREY, [WIDTH/2, HEIGHT/2], RADIUS)
 
     #generate random dot position
     x = random.randint(0,400)
@@ -65,24 +65,26 @@ while 1:
     total += 1
 
     #dot info for drawing the dot
-    dotInfo = [x,y,dotColor]
+    dotPosition = [x,y]
+    dotInfo = [dotPosition,dotColor]
     #add dot position and color to a list of dots to draw them
     dotInfoList.append(dotInfo)
 
     #draw current and previous dots
     for dotInfo in dotInfoList:
         #draw a dot with the color and position of the currently indexed dot info
-        dotColor = dotInfo[2]
-        dotPosition = [dotInfo[0],dotInfo[1]]
-        pygame.draw.circle(screen,dotColor,dotPosition,1)
-    
+        dotColor = dotInfo[1]
+        dotPosition = dotInfo[0]
+        pygame.draw.circle(screen,dotColor,dotPosition,2)
+
+        
     #calculate pi
     result = 4 * (circle/total)
     
     #display the text
     text = FONT.render(str(result), True, WHITE)
     textRect = text.get_rect()
-    textRect.bottomleft = (5,height)
+    textRect.bottomleft = (5,HEIGHT)
     screen.blit(text,textRect)
     
 
